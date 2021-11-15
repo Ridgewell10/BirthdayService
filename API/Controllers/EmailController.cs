@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Threading.Tasks;
 
@@ -11,7 +12,8 @@ namespace API.Controllers
     {
         private readonly ILoggerManager _logger;
         private readonly IBirthdayProcessor _birthdayProcessor;
-        public EmailController(ILoggerManager logger, IBirthdayProcessor processor)
+        private readonly IConfiguration _config;
+        public EmailController(ILoggerManager logger, IBirthdayProcessor processor,IConfiguration configuration)
         {
             _logger = logger;
             _birthdayProcessor = processor;
@@ -22,7 +24,6 @@ namespace API.Controllers
         public async Task<IActionResult> SendEmail()
         {
             var result = await _birthdayProcessor.GetEmployeeBirthday();
-
             return Ok(result);
         }
     }

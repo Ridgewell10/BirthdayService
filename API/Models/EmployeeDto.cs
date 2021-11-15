@@ -10,6 +10,6 @@ namespace API
         public DateTimeOffset dateOfBirth { get; set; }
         public DateTime employmentStartDate { get; set; }
         public DateTimeOffset? employmentEndDate { get; set; }
-        public DateTime lastNotification { get; set; }
+        public DateTime? lastNotification { get; set; }
     }
 }

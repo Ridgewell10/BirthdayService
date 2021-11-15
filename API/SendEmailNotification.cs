@@ -16,12 +16,13 @@ namespace API
         public SendEmailNotification()
         {
             _emailService = new EmailSender();
+
         }
 
         public async Task<bool> SendNotificationAsync(EmployeeDto employee)
         {
 
-            var message = new EmailMessage(new string[] { "ridglr@gmail.com" }, "It is your birthday today", "Happy Birthday "+ employee.name + " " + employee.lastname);
+            var message = new EmailMessage(new string[] { "yourEmail@gmail.com" }, "It is your birthday today", "Happy Birthday "+ employee.name + " " + employee.lastname);
             await _emailService.SendEmailAsync(message);
             return true;
         }

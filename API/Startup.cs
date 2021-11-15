@@ -1,4 +1,5 @@
 using Contracts;
+using Entities;
 using LoggerService;
 using MailService;
 using Microsoft.AspNetCore.Builder;
@@ -38,7 +39,7 @@ namespace API
                 .GetSection("EmailConfiguration")
                 .Get<EmailConfiguration>();
             services.AddSingleton(emailConfig);
-            services.AddSingleton< IBirthdayProcessor, BirthdayProcessor>();
+            services.AddSingleton<IBirthdayProcessor, BirthdayProcessor>();
             services.AddScoped<IMailerService, EmailSender>();
             services.Configure<FormOptions>(o => {
                 o.ValueLengthLimit = int.MaxValue;

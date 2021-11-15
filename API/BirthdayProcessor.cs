@@ -55,7 +55,7 @@ namespace API
 
                 foreach (var employee in employeeList)
                 {
-                    if (employee.dateOfBirth.Month == 10 && employee.dateOfBirth.Day == 28)
+                    if (employee.dateOfBirth.Month == DateTime.Now.Month && employee.dateOfBirth.Day == DateTime.Now.Day)
                     {
                         if (await _notification.SendNotificationAsync(employee) == false)
                         {

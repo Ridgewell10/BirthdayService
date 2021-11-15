@@ -1,9 +1,7 @@
 ﻿using Contracts;
 using MailKit.Net.Smtp;
 using MimeKit;
-using System;
-using System.IO;
-using System.Linq;
+
 using System.Threading.Tasks;
 using Entities;
 
@@ -12,14 +10,11 @@ namespace MailService
     public class EmailSender : IMailerService
     {
         private readonly EmailConfiguration _emailConfig;
-        public EmailSender(EmailConfiguration emailConfig)
-        {
-            _emailConfig = emailConfig;
-        }
+
         public EmailSender()
         {
-            _emailConfig = new EmailConfiguration();
         }
+
         public void SendEmail(EmailMessage message)
         {
             var emailMessage = CreateEmailMessage(message);
@@ -37,7 +32,7 @@ namespace MailService
         private MimeMessage CreateEmailMessage(EmailMessage message)
         {
             var emailMessage = new MimeMessage();
-            emailMessage.From.Add(new MailboxAddress("zola.matshoba@gmail.com"));
+            emailMessage.From.Add(new MailboxAddress(_emailConfig.From));
             emailMessage.To.AddRange(message.To);
             emailMessage.Subject = message.Subject;
 
@@ -60,7 +55,6 @@ namespace MailService
                 }
                 catch
                 {
-                    //log an error message or throw an exception, or both.
                     throw;
                 }
                 finally
@@ -77,7 +71,7 @@ namespace MailService
             {
                 try
                 {
-                    await client.ConnectAsync(_emailConfig.SmtpServer, _emailConfig.Port, true);
+                    await client.ConnectAsync(_emailConfig.SmtpServer, _emailConfig.Port, false);
                     client.AuthenticationMechanisms.Remove("XOAUTH2");
                     await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
 
