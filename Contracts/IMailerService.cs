@@ -1,10 +1,14 @@
-﻿using System.Net.Mail;
+﻿using Entities;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Contracts
 {
     public  interface IMailerService
     {
-        void SendMail(MailMessage mailMessage);
-
+        void SendEmail(EmailMessage message);
+        Task SendEmailAsync(EmailMessage message);
     }
 }
