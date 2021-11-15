@@ -12,8 +12,7 @@ namespace API.Controllers
     {
         private readonly ILoggerManager _logger;
         private readonly IBirthdayProcessor _birthdayProcessor;
-        private readonly IConfiguration _config;
-        public EmailController(ILoggerManager logger, IBirthdayProcessor processor,IConfiguration configuration)
+        public EmailController(ILoggerManager logger, IBirthdayProcessor processor)
         {
             _logger = logger;
             _birthdayProcessor = processor;
